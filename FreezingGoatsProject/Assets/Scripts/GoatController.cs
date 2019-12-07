@@ -54,7 +54,7 @@ public class GoatController : MonoBehaviour
     }
 
 
-    public void Move(float move, bool jump)
+    public void Move(float move)    
     {
 
         //only control the player if grounded or airControl is turned on
@@ -79,11 +79,15 @@ public class GoatController : MonoBehaviour
             }
         }
         // If the player should jump...
-        if (m_Grounded && jump)
+        
+    }
+    public void Jump(float jumpCharge)
+    {
+        if (m_Grounded)
         {
             // Add a vertical force to the player.
             m_Grounded = false;
-            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
+            m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce * Mathf.Clamp( jumpCharge+1f,1f,1.5f)));
         }
     }
 

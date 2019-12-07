@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour
 
     float moveHorizontal;
     bool jump;
+    float jumpCharge = 0f;
     bool yeet;
     float yeetDuration = 0f;
 
@@ -30,12 +31,17 @@ public class InputController : MonoBehaviour
         //Store the current horizontal input in the float moveHorizontal.
         moveHorizontal = Input.GetAxisRaw("Horizontal" + controllerSuffix) * speed;
 
-        if (Input.GetButtonDown("Jump" + controllerSuffix))
+        if (Input.GetButton("Jump" + controllerSuffix))
+        {
+            jumpCharge += Time.deltaTime;
+        } 
+        if (Input.GetButtonUp("Jump" + controllerSuffix))
         {
             jump = true;
+            Debug.Log("Jump num:" + controllerSuffix + " duration " + yeetDuration);
         }
 
-        if(Input.GetAxis("Scream" + controllerSuffix)>=0.7f)
+        if (Input.GetAxis("Scream" + controllerSuffix)>=0.7f)
         {
             honk = true; 
         }
@@ -49,16 +55,19 @@ public class InputController : MonoBehaviour
         if (Input.GetButtonUp("Interact" + controllerSuffix))
         {
             yeet = true;
-            Debug.Log( "yeet num:" + controllerSuffix +" duration " + yeetDuration);
-
+            Debug.Log( "yeet num:" + controllerSuffix +" duration " + yeetDuration); 
         }
 
     }
     void FixedUpdate()
     {
-        goatController.Move(moveHorizontal * Time.fixedDeltaTime, jump);
-        jump = false;
-
+        goatController.Move(moveHorizontal * Time.fixedDeltaTime);
+        if (jump)
+        {
+            goatController.Jump(jumpCharge);
+            jumpCharge = 0f;
+            jump = false;
+        }
         interactionController.Honk(honk);
         honk = false;
 
