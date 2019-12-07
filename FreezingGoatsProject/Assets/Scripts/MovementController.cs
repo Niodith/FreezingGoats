@@ -5,10 +5,11 @@ public class MovementController : MonoBehaviour
 {
 
     public float speed;                //Floating point variable to store the player's movement speed.
-    public float moveHorizontal;
-    public bool jump;
+
     public GoatController goatController;
 
+    float moveHorizontal;
+    bool jump;
 
     private Rigidbody2D rb2d;        //Store a reference to the Rigidbody2D component required to use 2D Physics.
 
