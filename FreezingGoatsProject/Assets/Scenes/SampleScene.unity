@@ -424,9 +424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: caee1cb1afe0dde48bd97db0fac9109d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  moveHorizontal: 0
-  jump: 0
+  speed: 50
   goatController: {fileID: 1447857887}
 --- !u!1 &1547393520
 GameObject:
