@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MovementController : MonoBehaviour
 {
-
+    public string controllerSuffix = "";
     public float speed;                //Floating point variable to store the player's movement speed.
 
     public GoatController goatController;
@@ -23,9 +23,9 @@ public class MovementController : MonoBehaviour
     private void Update()
     {
         //Store the current horizontal input in the float moveHorizontal.
-        moveHorizontal = Input.GetAxisRaw("Horizontal") * speed;
+        moveHorizontal = Input.GetAxisRaw("Horizontal" + controllerSuffix) * speed;
 
-        if (Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump" + controllerSuffix))
         {
             jump = true;
         }
@@ -34,7 +34,7 @@ public class MovementController : MonoBehaviour
     void FixedUpdate()
     {
         goatController.Move(moveHorizontal * Time.fixedDeltaTime, jump);
-       Debug.Log(moveHorizontal);
+       //Debug.Log(moveHorizontal + " controller: " + controllerSuffix);
         jump = false;
       
     }
